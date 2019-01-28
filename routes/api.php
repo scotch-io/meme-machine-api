@@ -7,3 +7,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('refresh', 'APILoginController@refresh');
     Route::post('me', 'APILoginController@me');
 });
+
+Route::get('gifs/random', 'RandomGifController');

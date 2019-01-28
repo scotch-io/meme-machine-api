@@ -40,4 +40,11 @@ return [
         ],
     ],
 
+    /**
+     * Added services
+     */
+
+    'giphy' => [
+        'key' => env('GIPHY_KEY')
+    ]
 ];
