@@ -89,15 +89,16 @@
     <p>This API call returns an <code>array</code> of <code>meme objects</code>.</p>
 
 <pre><code>{
-"data": [
-    {
-        "id": 1,
-        "gif_id": "xUNd9CS9KPooR9zNTi",
-        "gif_original_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/giphy.gif",
-        "gif_fixed_height_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200.gif",
-        "gif_fixed_width_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200w.gif",
-        "text": "meme title"
-    }
+    "data": [
+        {
+            "id": 1,
+            "gif_id": "xUNd9CS9KPooR9zNTi",
+            "gif_original_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/giphy.gif",
+            "gif_fixed_height_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200.gif",
+            "gif_fixed_width_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200w.gif",
+            "text": "meme title"
+        }
+    ]
 }</code></pre>
 
     <h2>Creating a Meme</h2>
