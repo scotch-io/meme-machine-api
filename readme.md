@@ -9,6 +9,8 @@ We won't be using Vagrant for this app thank god. We'll be using PHP's local ser
 -   Create a database file: `database/database.sqlite`
 -   Install Composer Packages: `composer install`
 -   Install JS Packages: `npm install`
+-   Copy `.env.example` to `.env`
+-   Create a JWT_SECRET: `php artisan jwt:secret`
 -   Run the App: `php artisan serve`
 -   View App: <http://localhost:8000>
 
