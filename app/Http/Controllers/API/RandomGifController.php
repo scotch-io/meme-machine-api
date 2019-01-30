@@ -21,14 +21,24 @@ class RandomGifController extends Controller
         $client = new Client();
         $response = $client->get($url);
         $data = json_decode($response->getBody());
+        $gif = $data->data;
 
-        return [
-            'gif' => [
-                'id' => $data->data->id,
-                'gif_original_url' => $data->data->images->original->url,
-                'gif_fixed_height_url' => $data->data->images->fixed_height->url,
-                'gif_fixed_width_url' => $data->data->images->fixed_width->url
+        $randomGif = [
+            'id' => $gif->id,
+            'images' => [
+                'original' => $gif->images->original->url,
+                'fixed_height' => $gif->images->fixed_height->url,
+                'fixed_width' => $gif->images->fixed_width->url,
             ]
         ];
+
+        if (isset($gif->user)) {
+            $randomGif['author'] = [
+                'username' => $gif->username,
+                'avatar' => $gif->user->avatar_url
+            ];
+        }
+
+        return $randomGif;
     }
 }

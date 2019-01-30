@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class APIAuthController extends Controller
 {
@@ -24,9 +26,33 @@ class APIAuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $this->validate(request(), [
+            'email' => 'required|string|email|max:255|exists:users,email',
+            'password' => 'required|string|min:6'
+        ]);
 
-        if (! $token = auth('api')->attempt($credentials)) {
+        $credentials = request(['email', 'password']);
+        if (!$token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
+    }
+
+    /**
+     * Register a user
+     * @return void
+     */
+    public function register()
+    {
+        $this->validate(request(), [
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
+
+        $credentials = request(['email', 'password']);
+        $user = User::create($credentials);
+        if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

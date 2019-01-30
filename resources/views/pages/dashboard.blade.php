@@ -87,11 +87,15 @@
     <h3>Example Response (200 OK)</h3>
 
     <pre><code>{
-    "gif": {
-        "id": "xUNd9CS9KPooR9zNTi",
-        "gif_original_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/giphy.gif",
-        "gif_fixed_height_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200.gif",
-        "gif_fixed_width_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200w.gif"
+    "id": "xULW8s8YUGAxkWGTxm",
+    "images": {
+        "original": "https://media2.giphy.com/media/xULW8s8YUGAxkWGTxm/giphy.gif",
+        "fixed_height": "https://media2.giphy.com/media/xULW8s8YUGAxkWGTxm/200.gif",
+        "fixed_width": "https://media2.giphy.com/media/xULW8s8YUGAxkWGTxm/200w.gif"
+    },
+    "author": {
+        "username": "the_chosen_one",
+        "avatar": "https://media.giphy.com/avatars/the_chosen_one/xjjgHCBsAGjG.gif"
     }
 }</code></pre>
 
@@ -109,22 +113,32 @@
 
     <h3>Example Response (200 OK)</h3>
 
-    <pre><code>{
-    "gifs": [
-        {
-            "id": "xUNd9CS9KPooR9zNTi",
-            "gif_original_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/giphy.gif",
-            "gif_fixed_height_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200.gif",
-            "gif_fixed_width_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200w.gif"
+    <pre><code>[
+    {
+        "id": "ZnZrgIwPaDcnS",
+        "images": {
+            "original": "https://media0.giphy.com/media/ZnZrgIwPaDcnS/giphy.gif",
+            "fixed_height": "https://media0.giphy.com/media/ZnZrgIwPaDcnS/200.gif",
+            "fixed_width": "https://media0.giphy.com/media/ZnZrgIwPaDcnS/200w.gif"
         },
-        {
-            "id": "xUNd9CS9KPooR9zNTi",
-            "gif_original_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/giphy.gif",
-            "gif_fixed_height_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200.gif",
-            "gif_fixed_width_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200w.gif"
+        "author": {
+            "username": "guillellano",
+            "avatar": "https://media3.giphy.com/avatars/default2.gif"
         }
-    ]
-}</code></pre>
+    },
+    {
+        "id": "3ov9kacqGycKQRH6Vy",
+        "images": {
+            "original": "https://media1.giphy.com/media/3ov9kacqGycKQRH6Vy/giphy.gif",
+            "fixed_height": "https://media1.giphy.com/media/3ov9kacqGycKQRH6Vy/200.gif",
+            "fixed_width": "https://media1.giphy.com/media/3ov9kacqGycKQRH6Vy/200w.gif"
+        },
+        "author": {
+            "username": "bentuber",
+            "avatar": "https://media1.giphy.com/avatars/bentuber/EBzFUD0dVy8X.png"
+        }
+    }
+]</code></pre>
 
     <h2>Getting All Memes</h2>
 
