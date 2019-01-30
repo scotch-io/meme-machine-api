@@ -21,7 +21,7 @@
                 <input id="email" type="email" class="input {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                 @if ($errors->has('email'))
-                    <span class="help-block" role="alert">
+                    <span class="help is-error" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
@@ -33,7 +33,7 @@
                 <input id="password" type="password" class="input {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                 @if ($errors->has('password'))
-                    <span class="help-block" role="alert">
+                    <span class="help is-error" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif

@@ -21,7 +21,7 @@
                 <input id="name" type="text" class="input {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
                 @if ($errors->has('name'))
-                    <span class="help-block">
+                    <span class="help is-error">
                         <strong>{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
@@ -33,7 +33,7 @@
                 <input id="email" type="email" class="input {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                 @if ($errors->has('email'))
-                    <span class="help-block" role="alert">
+                    <span class="help is-error" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
@@ -45,7 +45,7 @@
                 <input id="password" type="password" class="input {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                 @if ($errors->has('password'))
-                    <span class="help-block">
+                    <span class="help is-error">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
