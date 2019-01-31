@@ -156,8 +156,10 @@
     <h3>Example Response (200 OK)</h3>
 
     <p>This API call returns an <code>array</code> of <code>meme objects</code>.</p>
+    <p>Notice this API also returns pagination data so that you can build pagination on the frontend.</p>
 
 <pre><code>{
+    "current_page": 1,
     "data": [
         {
             "id": 1,
@@ -167,7 +169,17 @@
             "gif_fixed_width_url": "https://media2.giphy.com/media/xUNd9CS9KPooR9zNTi/200w.gif",
             "text": "meme title"
         }
-    ]
+    ],
+    "first_page_url": "https://memes.com/api/1/memes?page%5Bnumber%5D=1",
+    "from": null,
+    "last_page": 1,
+    "last_page_url": "https://memes.com/api/1/memes?page%5Bnumber%5D=1",
+    "next_page_url": null,
+    "path": "https://memes.com/api/1/memes",
+    "per_page": 30,
+    "prev_page_url": null,
+    "to": null,
+    "total": 1
 }</code></pre>
 
     <h2>Creating a Meme</h2>

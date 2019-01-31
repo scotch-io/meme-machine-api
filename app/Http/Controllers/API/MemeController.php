@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Meme;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class MemeController extends Controller
 {
@@ -18,10 +20,10 @@ class MemeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        $user = auth('api')->user();
-        return Meme::whereUserId($user->id)->latest()->get();
+        $memes = Meme::whereUserId($user->id);
+        return QueryBuilder::for($memes)->jsonPaginate();
     }
 
     /**
@@ -30,9 +32,28 @@ class MemeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $user = auth('api')->user();
+        $this->validate($request, ['gif_id' => 'string', 'text' => 'string']);
+
+        try {
+            $meme = $user->memes()->create($request->only(['gif_id', 'text']));
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+
+        return $meme;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user, Meme $meme)
+    {
+        return $meme;
     }
 
     /**
@@ -42,9 +63,17 @@ class MemeController extends Controller
      * @param  \App\Meme  $meme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Meme $meme)
+    public function update(Request $request, User $user, Meme $meme)
     {
-        $user = auth('api')->user();
+        $this->validate($request, ['gif_id' => 'string', 'text' => 'string']);
+
+        try {
+            $meme = $meme->update($request->only(['gif_id', 'text']));
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+
+        return $meme;
     }
 
     /**
@@ -53,8 +82,14 @@ class MemeController extends Controller
      * @param  \App\Meme  $meme
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Meme $meme)
+    public function destroy(User $user, Meme $meme)
     {
-        $user = auth('api')->user();
+        try {
+            $meme->destroy();
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+
+        return ['message' => 'Successfully deleted.'];
     }
 }
