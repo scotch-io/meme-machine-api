@@ -103,7 +103,7 @@
 
     <p><strong>No authentication required.</strong> Search for a gif that you will want to use. Pass in a search term and we'll grab anything that matches</p>
 
-    <pre><code>GET {{ $apiUrl }}/gifs/search</code></pre>
+    <pre><code>GET {{ $apiUrl }}/gifs/search?query={query}</code></pre>
 
     <h3>Parameters</h3>
 
@@ -185,7 +185,7 @@
 
     <h3>Example Response (200 OK)</h3>
 
-    <p>This API call returns an <code>array</code> of <code>meme objects</code>.</p>
+    <p>This API call returns the created meme.</p>
 
 <pre><code>{
     "data": [
@@ -201,6 +201,20 @@
 }</code></pre>
 
     <h2>Deleting a Meme</h2>
+
+    <p><strong>Authentication required.</strong> Deletes a meme out of the database.</p>
+
+    <pre><code>DELETE {{ $apiUrl }}/memes/{gif_id}</code></pre>
+
+    <h3>Parameters</h3>
+
+    <ul>
+        <li><strong>gif_id</strong></li>
+    </ul>
+
+    <h3>Example Response (200 OK)</h3>
+
+    <p>Returns <code>true</code> when deleting is successful.</p>
 
 </div>
 </div>
