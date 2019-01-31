@@ -12,7 +12,7 @@ class MemeController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Meme::class, 'meme');
+        // $this->authorizeResource(Meme::class, 'meme');
     }
 
     /**
