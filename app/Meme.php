@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 class Meme extends Model
 {
     protected $fillable = [
+        'user_id',
         'gif_id',
         'gif_original_url',
         'gif_fixed_height_url',
@@ -21,8 +22,15 @@ class Meme extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Used when saving memes
+     * We'll go grab all the links needed using a gif_id
+     */
     public function getGiphyGif()
     {
+        if ($this->gif_original_url && $this->gif_fixed_height_url && $this->gif_fixed_width_url)
+            return;
+
         $giphyKey = config('services.giphy.key');
         $url = "https://api.giphy.com/v1/gifs/{$this->gif_id}?api_key={$giphyKey}";
 

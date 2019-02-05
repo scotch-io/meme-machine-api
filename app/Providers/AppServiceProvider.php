@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Meme;
+use App\User;
 use App\Observers\MemeObserver;
+use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Meme::observe(MemeObserver::class);
+        User::observe(UserObserver::class);
     }
 
     /**

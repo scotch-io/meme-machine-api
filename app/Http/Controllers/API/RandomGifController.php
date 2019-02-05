@@ -15,13 +15,7 @@ class RandomGifController extends Controller
      */
     public function __invoke()
     {
-        $giphyKey = config('services.giphy.key');
-        $url = "https://api.giphy.com/v1/gifs/random?api_key={$giphyKey}";
-
-        $client = new Client();
-        $response = $client->get($url);
-        $data = json_decode($response->getBody());
-        $gif = $data->data;
+        $gif = get_random_gif();
 
         $randomGif = [
             'id' => $gif->id,
