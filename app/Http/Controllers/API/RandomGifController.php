@@ -16,23 +16,6 @@ class RandomGifController extends Controller
     public function __invoke()
     {
         $gif = get_random_gif();
-
-        $randomGif = [
-            'id' => $gif->id,
-            'images' => [
-                'original' => $gif->images->original->url,
-                'fixed_height' => $gif->images->fixed_height->url,
-                'fixed_width' => $gif->images->fixed_width->url,
-            ]
-        ];
-
-        if (isset($gif->user)) {
-            $randomGif['author'] = [
-                'username' => $gif->username,
-                'avatar' => $gif->user->avatar_url
-            ];
-        }
-
-        return $randomGif;
+        return format_gif($gif);
     }
 }

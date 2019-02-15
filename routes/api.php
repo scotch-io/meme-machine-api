@@ -11,6 +11,7 @@ Route::prefix('{user}')->group(function () {
         Route::post('me', 'APIAuthController@me');
     });
 
+    Route::get('gifs/trending', 'TrendingGifController');
     Route::get('gifs/random', 'RandomGifController');
     Route::get('gifs/search/{query}', 'SearchGifController');
     Route::apiResource('memes', 'MemeController');

@@ -6,17 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 
-class SearchGifController extends Controller
+class TrendingGifController extends Controller
 {
-    /**
-     * Get a random gif from the Giphy API
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function __invoke(string $query)
+    public function __invoke()
     {
         $giphyKey = config('services.giphy.key');
-        $url = "https://api.giphy.com/v1/gifs/search?api_key={$giphyKey}&q={$query}";
+        $url = "https://api.giphy.com/v1/gifs/trending?api_key={$giphyKey}";
 
         $client = new Client();
         $response = $client->get($url);
