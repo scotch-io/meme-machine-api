@@ -1,11 +1,15 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\User;
 
 $factory->define(App\Meme::class, function (Faker $faker) {
     $randomGif = get_random_gif();
 
     return [
+        'user_id' => function () {
+            return factory(User::class)->create()->id;
+        },
         'text' => $faker->catchPhrase,
         'gif_id' => $randomGif->id,
         'gif_original_url' => $randomGif->images->original->url,

@@ -1,16 +1,17 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Meme;
 
-class DatabaseSeeder extends Seeder
+class MemeSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call(MemeSeeder::class);
+        factory(Meme::class, 20)->create();
     }
 }
