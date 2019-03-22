@@ -20,8 +20,9 @@ class MemeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
+        $user = auth('api')->user();
         $memes = Meme::whereUserId($user->id);
         return QueryBuilder::for($memes)->jsonPaginate();
     }
@@ -32,8 +33,10 @@ class MemeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
+        $user = auth('api')->user();
+
         $this->validate($request, ['gif_id' => 'string', 'text' => 'string']);
 
         try {
@@ -51,7 +54,7 @@ class MemeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Meme $meme)
+    public function show(Meme $meme)
     {
         return $meme;
     }
@@ -63,7 +66,7 @@ class MemeController extends Controller
      * @param  \App\Meme  $meme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user, Meme $meme)
+    public function update(Request $request, Meme $meme)
     {
         $this->validate($request, ['gif_id' => 'string', 'text' => 'string']);
 
@@ -82,8 +85,10 @@ class MemeController extends Controller
      * @param  \App\Meme  $meme
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, Meme $meme)
+    public function destroy(Meme $meme)
     {
+        $user = auth('api')->user();
+
         try {
             $meme->destroy();
         } catch (\Exception $e) {

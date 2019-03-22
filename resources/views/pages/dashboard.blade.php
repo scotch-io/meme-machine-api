@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $apiUrl = "https://memes.com/api/" . auth()->user()->id;
+    $apiUrl = "https://memes.com/api/";
 @endphp
 
 @section('content')
