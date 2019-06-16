@@ -53,7 +53,7 @@ function caption_gif($gifId, $text)
     $uploadedUrl = Cloudder::getResult()['secure_url'];
 
     $text = urlencode($text);
-    $captionedUrl = str_replace('upload/', "upload/l_text:Arial_45_bold_stroke:{$text},g_south,y_30,co_rgb:FFFFFF,bo_5px_solid_black/", $uploadedUrl);
+    $captionedUrl = str_replace('upload/', "upload/l_text:Arial_65_bold_stroke:{$text},g_south,y_30,co_rgb:FFFFFF,bo_5px_solid_black/", $uploadedUrl);
 
     return $captionedUrl;
 }
