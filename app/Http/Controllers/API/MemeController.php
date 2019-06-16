@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Meme;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Meme;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class MemeController extends Controller
@@ -23,7 +22,12 @@ class MemeController extends Controller
     public function index()
     {
         $user = auth('api')->user();
-        $memes = Meme::whereUserId($user->id);
+        if ($user) {
+            $memes = Meme::whereUserId($user->id);
+        } else {
+            $memes = Meme::latest()->get();
+        }
+
         return QueryBuilder::for($memes)->jsonPaginate();
     }
 
@@ -35,12 +39,20 @@ class MemeController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth('api')->user();
-
         $this->validate($request, ['gif_id' => 'string', 'text' => 'string']);
 
+        // get our data and captioned url
+        $data = $request->only(['gif_id', 'text']);
         try {
-            $meme = $user->memes()->create($request->only(['gif_id', 'text']));
+            $data['captioned_url'] = caption_gif($data['gif_id'], $data['text']);
+        } catch (\Exception $e) {}
+
+        // if there is a user, apply their user_id
+        if ($user = auth('api')->user()) $data['user_id'] = $user->id;
+
+        // create the meme
+        try {
+            $meme = Meme::create($data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
@@ -88,6 +100,8 @@ class MemeController extends Controller
     public function destroy(Meme $meme)
     {
         $user = auth('api')->user();
+
+        // validate that the user is the one deleting it
 
         try {
             $meme->destroy();

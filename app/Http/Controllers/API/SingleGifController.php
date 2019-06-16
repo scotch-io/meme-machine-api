@@ -15,8 +15,8 @@ class SingleGifController extends Controller
 
         $client = new Client();
         $response = $client->get($url);
-        $gif = json_decode($response->getBody());
+        $data = json_decode($response->getBody());
 
-        return format_gif($gif);
+        return format_gif($data->data);
     }
 }

@@ -14,6 +14,7 @@ class Meme extends Model
         'gif_original_url',
         'gif_fixed_height_url',
         'gif_fixed_width_url',
+        'captioned_url',
         'text',
     ];
 
@@ -31,15 +32,9 @@ class Meme extends Model
         if ($this->gif_original_url && $this->gif_fixed_height_url && $this->gif_fixed_width_url)
             return;
 
-        $giphyKey = config('services.giphy.key');
-        $url = "https://api.giphy.com/v1/gifs/{$this->gif_id}?api_key={$giphyKey}";
-
-        $client = new Client();
-        $response = $client->get($url);
-        $data = json_decode($response->getBody());
-
-        $this->gif_original_url= $data->data->images->original->url;
-        $this->gif_fixed_height_url= $data->data->images->fixed_height->url;
-        $this->gif_fixed_width_url= $data->data->images->fixed_width->url;
+        $gif = get_gif($this->gif_id);
+        $this->gif_original_url = $gif->images->original->url;
+        $this->gif_fixed_height_url = $gif->images->fixed_height->url;
+        $this->gif_fixed_width_url = $gif->images->fixed_width->url;
     }
 }
