@@ -14,7 +14,7 @@ class AddCaptionedUrlToMemesTable extends Migration
     public function up()
     {
         Schema::table('memes', function (Blueprint $table) {
-            //
+            $table->string('captioned_url')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddCaptionedUrlToMemesTable extends Migration
     public function down()
     {
         Schema::table('memes', function (Blueprint $table) {
-            //
+            $table->dropColumn('captioned_url');
         });
     }
 }
