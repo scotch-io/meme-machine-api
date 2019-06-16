@@ -15,7 +15,7 @@ class MemeObserver
      */
     public function created(Meme $meme)
     {
-        $meme->getGiphyGif();
+        $meme->getGiphyGifUrls();
     }
 
     /**
@@ -26,7 +26,7 @@ class MemeObserver
      */
     public function updated(Meme $meme)
     {
-        $meme->getGiphyGif();
+        $meme->getGiphyGifUrls();
     }
 
     /**

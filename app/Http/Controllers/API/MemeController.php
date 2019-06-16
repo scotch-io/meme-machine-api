@@ -41,21 +41,19 @@ class MemeController extends Controller
     {
         $this->validate($request, ['gif_id' => 'string', 'text' => 'string']);
 
-        // get our data and captioned url
         $data = $request->only(['gif_id', 'text']);
-        try {
-            $data['captioned_url'] = caption_gif($data['gif_id'], $data['text']);
-        } catch (\Exception $e) {}
-
-        // if there is a user, apply their user_id
         if ($user = auth('api')->user()) $data['user_id'] = $user->id;
 
-        // create the meme
         try {
             $meme = Meme::create($data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
+
+        // fill in the new info
+        $meme->getGiphyGifUrls();
+        $meme->captioned_url = caption_gif($data['gif_id'], $data['text']);
+        $meme->save();
 
         return $meme;
     }
@@ -87,6 +85,11 @@ class MemeController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
+
+        // fill in the new info
+        $meme->getGiphyGifUrls();
+        $meme->captioned_url = caption_gif($meme->gif_id, $meme->text);
+        $meme->save();
 
         return $meme;
     }

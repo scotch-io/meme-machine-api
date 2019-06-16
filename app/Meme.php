@@ -27,7 +27,7 @@ class Meme extends Model
      * Used when saving memes
      * We'll go grab all the links needed using a gif_id
      */
-    public function getGiphyGif()
+    public function getGiphyGifUrls()
     {
         if ($this->gif_original_url && $this->gif_fixed_height_url && $this->gif_fixed_width_url)
             return;
@@ -36,5 +36,7 @@ class Meme extends Model
         $this->gif_original_url = $gif->images->original->url;
         $this->gif_fixed_height_url = $gif->images->fixed_height->url;
         $this->gif_fixed_width_url = $gif->images->fixed_width->url;
+
+        $this->save();
     }
 }
